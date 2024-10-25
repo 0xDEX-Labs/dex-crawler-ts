@@ -32,7 +32,6 @@ async function updateTokensData(): Promise<void> {
   try {
     // Fetch tokens from the database
     const tokens: Token[] = await prisma.token.findMany({
-      where: { chain: 'sol' },
       orderBy: { created_at: 'desc' },
       select: {
         chain: true,

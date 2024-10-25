@@ -25,14 +25,14 @@ import { FetchError, DatabaseError } from '@/helper/errorHandling.js';
 // 添加 enum 定义（在文件顶部的 imports 后面）
 enum ChainType {
   ETH = 'eth',
-  SOLANA = 'solana',
+  SOLANA = 'sol',
 }
 
 async function updateTokensData(): Promise<void> {
   try {
     // Fetch tokens from the database
     const tokens: Token[] = await prisma.token.findMany({
-      //where: { chain: TOKEN_CHAIN },
+      where: { chain: 'sol' },
       orderBy: { created_at: 'desc' },
       select: {
         chain: true,
@@ -93,14 +93,26 @@ async function updateTokensData(): Promise<void> {
         try {
           const data = await fetchTokenData(page);
 
+          // Add data validation
+          if (!data) {
+            throw new FetchError(
+              `No data returned for token ${token.token_address}`,
+            );
+          }
+
           switch (type) {
             case 'stats':
               await updateTokenStatsInDatabase(token, data as TokenStatsData);
               console.log(`Token ${token.token_address} stats updated.`);
               break;
             case 'top_buys_stats':
-              const holderData = data.holders as HolderData;
-              await updateTopBuysInDatabase(token, holderData);
+              // Validate holder data structure
+              if (!data.holders || typeof data.holders !== 'object') {
+                throw new FetchError(
+                  `Invalid holder data for token ${token.token_address}`,
+                );
+              }
+              await updateTopBuysInDatabase(token, data.holders as HolderData);
               console.log(
                 `Token ${token.token_address} top_buys_stats data updated.`,
               );
@@ -109,6 +121,14 @@ async function updateTokensData(): Promise<void> {
               throw new Error(`Unknown request type: ${type}`);
           }
         } catch (error) {
+          // Add network error handling
+          if (error.message?.includes('network not supported')) {
+            console.log(
+              `Skipping unsupported network for token ${token.token_address}`,
+            );
+            return;
+          }
+
           if (error instanceof FetchError || error instanceof DatabaseError) {
             console.error(error.message);
           } else {
@@ -145,7 +165,6 @@ function buildRequests(tokens: Token[]) {
       url: `${BASE_URLS.stats}/${chainType}/${token.token_address}`,
       userData: { token, type: 'stats' },
     });
-
     topBuysRequests.push({
       url: `${BASE_URLS.topBuys}/${chainType}/${token.token_address}`,
       userData: { token, type: 'top_buys_stats' },

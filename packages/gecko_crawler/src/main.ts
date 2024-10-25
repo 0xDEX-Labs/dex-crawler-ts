@@ -16,18 +16,23 @@ import {
   updateTopBuysInDatabase,
 } from '@/database/index.js';
 import {
-  TOKEN_CHAIN,
   MAX_CONCURRENCY,
   REQUEST_TIMEOUT,
   BASE_URLS,
 } from '@/helper/constants.js';
 import { FetchError, DatabaseError } from '@/helper/errorHandling.js';
 
+// 添加 enum 定义（在文件顶部的 imports 后面）
+enum ChainType {
+  ETH = 'eth',
+  SOLANA = 'solana',
+}
+
 async function updateTokensData(): Promise<void> {
   try {
     // Fetch tokens from the database
     const tokens: Token[] = await prisma.token.findMany({
-      where: { chain: TOKEN_CHAIN },
+      //where: { chain: TOKEN_CHAIN },
       orderBy: { created_at: 'desc' },
       select: {
         chain: true,
@@ -132,12 +137,17 @@ function buildRequests(tokens: Token[]) {
   const topBuysRequests = [];
 
   tokens.forEach((token) => {
+    // 根据 token.chain 使用相应的链类型
+    const chainType =
+      token.chain === ChainType.ETH ? ChainType.ETH : ChainType.SOLANA;
+    // 使用 token.chain 来确定正确的链
     statsRequests.push({
-      url: `${BASE_URLS.stats}/${TOKEN_CHAIN}/${token.token_address}`,
+      url: `${BASE_URLS.stats}/${chainType}/${token.token_address}`,
       userData: { token, type: 'stats' },
     });
+
     topBuysRequests.push({
-      url: `${BASE_URLS.topBuys}/${TOKEN_CHAIN}/${token.token_address}`,
+      url: `${BASE_URLS.topBuys}/${chainType}/${token.token_address}`,
       userData: { token, type: 'top_buys_stats' },
     });
   });

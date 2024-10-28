@@ -138,7 +138,6 @@ export interface TokenMetrics {
   transactions_24h_sells?: number;
   smart_buy_24h?: number;
   smart_sell_24h?: number;
-  created_at?: Date;
   pair_address?: string;
   tx_count?: number;
   holdersUpdatedAt?: Date;

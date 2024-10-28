@@ -120,8 +120,6 @@ export async function upsertTopTrader(
       tags: topTraderData.tags || [],
       maker_token_tags: topTraderData.maker_token_tags || [],
       tag_rank: topTraderData.tag_rank,
-      created_at: new Date(),
-      updated_at: new Date(),
     },
   });
 }

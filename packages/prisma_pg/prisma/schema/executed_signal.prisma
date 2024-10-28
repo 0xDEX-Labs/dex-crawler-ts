@@ -1,0 +1,11 @@
+model ExecutedSignal {
+  id            Int        @id @default(autoincrement())
+  signal_id     Int        @unique
+  executed_at   DateTime?  @default(now()) @db.Timestamp(6)
+  chain         String?    @db.VarChar(255)
+  token_address String?    @db.VarChar(255)
+  status        String     @default("pending") @db.VarChar(255)
+  GmgnSignal    GmgnSignal @relation(fields: [signal_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([token_address, chain], map: "uq_token_chain")
+}

@@ -1,0 +1,57 @@
+model TopTrader {
+  id                     Int       @id @default(autoincrement())
+  chain                  String    @db.VarChar(255)
+  token_address          String    @db.VarChar(255)
+  wallet_address         String    @db.VarChar(255)
+  realized_profit        Decimal?
+  unrealized_profit      Decimal?
+  profit                 Decimal?
+  profit_change          Decimal?
+  buy_amount             Decimal?
+  buy_amount_cur         Decimal?
+  sell_amount            Decimal?
+  sell_amount_cur        Decimal?
+  buy_tx_count           Int?
+  buy_tx_count_cur       Int?
+  sell_tx_count          Int?
+  sell_tx_count_cur      Int?
+  last_trade_at          DateTime?
+  addr_type              Int?
+  amount_cur             Decimal?
+  usd_value              Decimal?
+  cost_cur               Decimal?
+  sell_amount_percentage Decimal?
+  sell_volume_cur        Decimal?
+  buy_volume_cur         Decimal?
+  netflow_usd            Decimal?
+  netflow_amount         Decimal?
+  wallet_tag_v2          String?   @db.VarChar(255)
+  eth_balance            String?
+  sol_balance            String?
+  trx_balance            String?
+  balance                String?
+  amount_percentage      Decimal?
+  unrealized_pnl         Decimal?
+  avg_cost               Decimal?
+  avg_sold               Decimal?
+  accu_amount            Decimal?
+  accu_cost              Decimal?
+  cost                   Decimal?
+  total_cost             Decimal?
+  name                   String?
+  avatar                 String?
+  twitter_username       String?   @db.VarChar(255)
+  twitter_name           String?   @db.VarChar(255)
+  tags                   String[]
+  maker_token_tags       String[]
+  tag_rank               Json?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
+  hour_timestamp         DateTime
+  token                  Token     @relation(fields: [chain, token_address], references: [chain, token_address])
+
+  @@unique([chain, token_address, wallet_address], name: "topTraderCompositeUnique")
+  @@index([chain])
+  @@index([token_address])
+  @@index([wallet_address])
+}

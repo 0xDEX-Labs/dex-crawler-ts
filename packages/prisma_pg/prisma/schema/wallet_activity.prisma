@@ -1,0 +1,34 @@
+model WalletActivity {
+  id                    Int          @id @default(autoincrement())
+  wallet_address        String       @db.VarChar(255)
+  chain                 String       @db.VarChar(255)
+  tx_hash               String       @db.VarChar(255)
+  timestamp             BigInt?
+  event_type            String       @db.VarChar(255)
+  token_address         String       @db.VarChar(255)
+  token                 Json?
+  token_amount          String?      @db.VarChar(255)
+  quote_amount          String?      @db.VarChar(255)
+  cost_usd              Float?
+  buy_cost_usd          Float?
+  price                 Float?
+  price_usd             Float?
+  is_open_or_close      Int?
+  quote_address         String       @db.VarChar(255)
+  quote_token           Json?
+  from_address          String?      @db.VarChar(255)
+  from_is_contract      Boolean?
+  to_address            String?      @db.VarChar(255)
+  to_is_contract        Boolean?
+  balance               String?      @db.VarChar(255)
+  sell_30d              Int?
+  last_active_timestamp Int?
+  smartWalletId         Int?
+  SmartWallet           SmartWallet? @relation(fields: [smartWalletId], references: [id])
+
+  @@unique([chain, wallet_address, tx_hash], name: "walletActivityChainTxHashUnique")
+  @@index([wallet_address])
+  @@index([tx_hash])
+  @@index([token_address])
+  @@index([quote_address])
+}

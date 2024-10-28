@@ -1,0 +1,27 @@
+model TopBuysStats {
+  id                      Int      @id @default(autoincrement())
+  chain                   String   @db.VarChar(255)
+  token_address           String   @db.VarChar(255)
+  holder_count_70         Int
+  hold                    Int
+  bought_more             Int
+  sold_part               Int
+  sold                    Int
+  transferred             Int
+  bought_rate             Decimal
+  holding_rate            Decimal
+  smart_pos               Json?
+  smart_count_hold        Int?
+  smart_count_bought_more Int?
+  smart_count_sold_part   Int?
+  smart_count_sold        Int?
+  smart_count_transferred Int?
+  top_10_holder_rate      Decimal
+  created_at              DateTime @default(now())
+  updated_at              DateTime @updatedAt
+  token                   Token    @relation(fields: [chain, token_address], references: [chain, token_address])
+
+  @@unique([chain, token_address], name: "topBuysCompositeUnique")
+  @@index([chain])
+  @@index([token_address])
+}

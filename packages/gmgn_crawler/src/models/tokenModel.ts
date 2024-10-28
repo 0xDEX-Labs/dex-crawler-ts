@@ -77,7 +77,8 @@ async function parseAndSaveHotTokens(data: any[]) {
             deploy_time: token.open_timestamp,
 
             renounced: token.renounced,
-            twitter_username: token.twitter_username,
+            //@ts-ignore
+            twitter: token.twitter,
             website: token.website,
             telegram: token.telegram,
             buy_tax: token.buy_tax,

@@ -1,0 +1,13 @@
+model HotToken {
+  id             Int      @id @default(autoincrement())
+  chain          String   @db.VarChar(255)
+  token_address  String   @db.VarChar(255)
+  hour_timestamp DateTime
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  token          Token    @relation(fields: [chain, token_address], references: [chain, token_address])
+
+  @@unique([chain, token_address, hour_timestamp])
+  @@index([chain, token_address, hour_timestamp])
+  @@index([hour_timestamp])
+}

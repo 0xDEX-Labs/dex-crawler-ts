@@ -1,0 +1,38 @@
+model GmgnSignal {
+  id                Int             @id @default(autoincrement())
+  timestamp         BigInt
+  maker             String?
+  token_address     String          @db.VarChar(255)
+  chain             String          @db.VarChar(255)
+  token_price       Decimal?
+  from_timestamp    BigInt?
+  buy_duration      Int?
+  buy_usd           Decimal?
+  tx_count          Int?
+  signal_type       String?         @db.VarChar(255)
+  smart_buy         Int?
+  smart_sell        Int?
+  signal_1h_count   Int?
+  first_entry_price Decimal?
+  price_change      Float?
+  link              Json?
+  recent_buys       Json?
+  is_first          Boolean         @default(true)
+  created_at        DateTime        @default(now())
+  token_symbol      String?         @db.VarChar(255)
+  raw_data          Json?
+  source            String          @default("gmgn_web") @db.VarChar(255)
+  signal_id         Int?            @unique
+  last_occurrence   DateTime        @default(now())
+  occurrence_count  Int?            @default(1)
+  updated_at        DateTime?       @updatedAt
+  score             Decimal?
+  ExecutedSignal    ExecutedSignal?
+  token             Token           @relation("TokenGmgnSignals", fields: [chain, token_address], references: [chain, token_address])
+  UserOrder         UserOrder[]
+
+  @@unique([source, chain, token_address, signal_type, timestamp], name: "gmgnSignalUnique")
+  @@index([chain, token_address])
+  @@index([source, chain, token_address])
+  @@index([last_occurrence])
+}

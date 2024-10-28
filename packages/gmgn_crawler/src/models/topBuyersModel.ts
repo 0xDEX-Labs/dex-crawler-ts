@@ -1,11 +1,7 @@
 import prisma from '@/database/prisma.js';
+import { TopBuysWallet } from '@prisma/client';
 
-interface TopBuyerData {
-  chain: string;
-  token_address: string;
-  wallet_address: string;
-  wallet_tag?: string;
-}
+type TopBuyerData = Omit<TopBuysWallet, 'id' | 'created_at' | 'updated_at'>;
 
 export async function upsertTopBuyer(
   chain: string,

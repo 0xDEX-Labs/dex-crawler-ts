@@ -49,7 +49,8 @@ async function parseAndSaveHotTokens(data: any[]) {
             call_number: token.call_number,
 
             renounced: token.renounced,
-            twitter_username: token.twitter_username,
+            //@ts-ignore
+            twitter: token.twitter,
             website: token.website,
             telegram: token.telegram,
             buy_tax: token.buy_tax,

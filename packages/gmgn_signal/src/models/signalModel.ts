@@ -49,7 +49,15 @@ export async function storeSignals(
               total_supply: signal.token?.total_supply,
               website: signal.token?.website,
               telegram: signal.token?.telegram,
-              twitter_username: signal.token?.twitter_username,
+              //@ts-ignore
+              twitter: signal.token?.twitter_username
+                ? signal.token.twitter_username.startsWith('http')
+                  ? signal.token.twitter_username
+                  : `https://x.com/${signal.token.twitter_username.replace(
+                      '@',
+                      '',
+                    )}`
+                : null,
               is_open_source: signal.token?.is_open_source === 1,
               renounced: signal.token?.renounced,
               pool_creation_timestamp: signal.token?.pool_creation_timestamp,
@@ -92,7 +100,7 @@ export async function storeSignals(
             },
           });
 
-          // ��义时间窗口（15分钟前）
+          // 义时间窗口（15分钟前）
           const fifteenMinutesAgo = BigInt(
             Math.floor(Date.now() / 1000) - 15 * 60,
           );

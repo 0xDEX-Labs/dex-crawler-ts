@@ -10,7 +10,7 @@ export interface TokenData {
 
   website: string;
   telegram: string;
-  twitter_username: string;
+  twitter: string;
 
   top_pools: string;
   pool_creation_timestamp: number;

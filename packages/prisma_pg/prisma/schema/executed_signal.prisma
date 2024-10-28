@@ -9,5 +9,3 @@ model ExecutedSignal {
 
   @@unique([token_address, chain], map: "uq_token_chain")
 }
-
-

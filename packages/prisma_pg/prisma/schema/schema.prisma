@@ -1,11 +1,9 @@
-// Indicates that you want to generate Prisma Client
 generator client {
-  provider = "prisma-client-js"
-  output   = "../../../node_modules/.prisma/client"
+  provider        = "prisma-client-js"
+  output          = "../../../node_modules/.prisma/client"
   previewFeatures = ["prismaSchemaFolder"]
 }
 
-// Specifies your database connection
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")

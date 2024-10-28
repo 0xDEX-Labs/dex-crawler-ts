@@ -5,6 +5,10 @@ dist
 node_modules
 storage
 .env
-packages/prisma/migrations
-packages/prisma/migrations/*
+packages/prisma_pg/prisma/erd
+packages/prisma_pg/prisma/erd/*
+packages/prisma_pg/prisma/docs
+packages/prisma_pg/prisma/docs/*
+packages/prisma_pg/prisma/migrations
+packages/prisma_pg/prisma/migrations/*
 *.log

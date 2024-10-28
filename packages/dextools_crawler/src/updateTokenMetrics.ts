@@ -150,7 +150,7 @@ async function processTokenData(
   log: any,
 ) {
   const tokenMetrics = parseTokenMetrics(token, result);
-  await updateTokenMetricsInDatabase(tokenMetrics);
+  await updateTokenMetricsInDatabase(tokenMetrics, result);
   log.info(`Token ${token.token_address} metrics updated.`);
 
   if (token.chain === 'sol') {
@@ -269,8 +269,12 @@ function parseTax(taxData: {
 }
 
 // Function to update the TokenMetrics in the database
-async function updateTokenMetricsInDatabase(metrics: TokenMetrics) {
+async function updateTokenMetricsInDatabase(
+  metrics: TokenMetrics,
+  dextoolsResult: DextoolsResult,
+) {
   try {
+    // Continue with existing token metrics update
     await prisma.tokenMetrics.upsert({
       where: {
         chain_token_address_timestamp: {
@@ -312,8 +316,25 @@ async function updateTokenMetricsInDatabase(metrics: TokenMetrics) {
         reserve: metrics.reserve,
       },
     });
+    // Safely extract social media links with null checks
+    const socialMediaLinks = {
+      twitter: dextoolsResult?.token?.links?.twitter || null,
+      website: dextoolsResult?.token?.links?.website || null,
+      telegram: dextoolsResult?.token?.links?.telegram || null,
+    };
 
-    // Update Token deploy_time
+    // Only include non-null social media links in the update
+    const socialMediaUpdates = Object.entries(socialMediaLinks).reduce(
+      (acc, [key, value]) => {
+        if (value !== null && value !== '') {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {},
+    );
+
+    // Update token metrics and social media links
     await prisma.token.update({
       where: {
         chain_token_address: {
@@ -322,13 +343,14 @@ async function updateTokenMetricsInDatabase(metrics: TokenMetrics) {
         },
       },
       data: {
+        ...socialMediaUpdates,
         deploy_time: metrics.token_deploy_timestamp
           ? BigInt(metrics.token_deploy_timestamp.toString())
           : null,
       },
     });
   } catch (error) {
-    console.error('Error updating token metrics in the database:', error);
+    console.error('Error updating token data:', error);
     throw error;
   }
 }

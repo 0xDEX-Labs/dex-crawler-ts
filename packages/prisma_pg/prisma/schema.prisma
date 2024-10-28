@@ -19,7 +19,7 @@ model Token {
   total_supply                            Decimal?
   website                                 String?
   telegram                                String?
-  twitter_username                        String?         @db.VarChar(255)
+  twitter                                 String?         @db.VarChar(255)
   is_open_source                          Boolean?
   pool_creation_timestamp                 BigInt?
   is_honeypot                             Boolean?

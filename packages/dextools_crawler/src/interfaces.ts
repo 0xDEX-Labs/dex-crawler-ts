@@ -4,6 +4,10 @@
 export interface Token {
   chain: string;
   token_address: string;
+  // Add social media fields
+  twitter?: string;
+  website?: string;
+  telegram?: string;
 }
 
 // Interface for the Dextools API response
@@ -65,6 +69,21 @@ export interface DextoolsResult {
         is_potentially_scam: string;
         transfer_pausable: string;
       };
+    };
+    links: {
+      bitbucket: string;
+      discord: string;
+      facebook: string;
+      github: string;
+      instagram: string;
+      linkedin: string;
+      medium: string;
+      reddit: string;
+      telegram: string;
+      tiktok: string;
+      twitter: string;
+      website: string;
+      youtube: string;
     };
   };
 }

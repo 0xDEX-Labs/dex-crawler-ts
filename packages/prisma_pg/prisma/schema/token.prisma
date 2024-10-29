@@ -4,6 +4,7 @@ model Token {
   token_address                           String          @db.VarChar(255)
   symbol                                  String?         @db.VarChar(255)
   name                                    String?         @db.VarChar(255)
+  creator_address                         String?         @db.VarChar(255)
   logo                                    String?
   decimals                                Int?
   total_supply                            Decimal?
@@ -58,6 +59,8 @@ model Token {
   top_buys_stats                          TopBuysStats?
   TopBuysWallet                           TopBuysWallet[]
   top_traders                             TopTrader[]
+  token_creator  TokenCreator?  @relation("CreatorTokens", fields: [creator_address], references: [creator_address])
+
 
   @@unique([chain, token_address])
   @@index([chain])

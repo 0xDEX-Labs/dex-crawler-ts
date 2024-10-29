@@ -1,5 +1,4 @@
 import { createPlaywrightRouter } from 'crawlee';
-import { rankSolTokens } from './handlers/rankSolTokens.js';
 import { rankEthTokens } from './handlers/rankEthTokens.js';
 import { rankEthWallets } from './handlers/rankEthWallets.js';
 import { rankSolWallets } from './handlers/rankSolWallets.js';

@@ -13,3 +13,9 @@ export const generateWalletActivityUrl = (walletAddress, chain) => {
 export const generateTopBuyersUrl = (address, chain) => {
   return `https://gmgn.ai/defi/quotation/v1/tokens/top_buyers/${chain}/${address}`;
 };
+
+export const generatePumpUrl = (address) => {
+  return `https://pump.fun/${address}`;
+};
+
+// https://frontend-api.pump.fun/sol-price

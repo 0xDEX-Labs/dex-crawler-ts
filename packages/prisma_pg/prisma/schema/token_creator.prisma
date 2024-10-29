@@ -4,6 +4,7 @@ model TokenCreator {
   token_address      String?   @unique @db.VarChar(255)
   display_name       String?   @db.VarChar(255)
   twitter_type       String?   @db.VarChar(255)
+  twitter_url        String?   @db.VarChar(255)
   followers_count    Int?      @default(0)
   following_count    Int?      @default(0)
   view_count         Int?      @default(0)
@@ -16,6 +17,7 @@ model TokenCreator {
   total_token_count      Int?    @default(0)
   valuable_token_count   Int?    @default(0)
   valuable_tokens_detail Json?   @db.Json
+  raw_metadata           String? @db.Text
 
   // Token deployment     history
   total_deployments      Int? @default(0)
@@ -28,8 +30,7 @@ model TokenCreator {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
+  @@unique([token_address, creator_address])
   @@index([creator_address])
-  @@index([token_address,creator_address])
-  @@unique([token_address,creator_address])
-
+  @@index([token_address, creator_address])
 }

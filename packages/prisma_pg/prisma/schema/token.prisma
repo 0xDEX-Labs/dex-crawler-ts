@@ -59,8 +59,7 @@ model Token {
   top_buys_stats                          TopBuysStats?
   TopBuysWallet                           TopBuysWallet[]
   top_traders                             TopTrader[]
-  token_creator  TokenCreator?  @relation("CreatorTokens", fields: [creator_address], references: [creator_address])
-
+  token_creator                           TokenCreator?   @relation("CreatorTokens", fields: [creator_address], references: [creator_address])
 
   @@unique([chain, token_address])
   @@index([chain])

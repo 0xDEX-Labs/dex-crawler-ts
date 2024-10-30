@@ -157,10 +157,6 @@ export async function storeSignals(
               chain: signal.token?.chain,
               token_price: signal.token_price,
               from_timestamp: signal.from_timestamp,
-              //@ts-ignore
-              updated_at: signal.updated_at
-                ? new Date(signal.updated_at * 1000)
-                : undefined,
               buy_duration: signal.buy_duration,
               buy_usd: signal.buy_usd,
               tx_count: signal.tx_count,

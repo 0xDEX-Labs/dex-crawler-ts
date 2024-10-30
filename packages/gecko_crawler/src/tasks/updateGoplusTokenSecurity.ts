@@ -263,7 +263,6 @@ async function updateTokenSecurity(): Promise<void> {
                 top10HolderRate !== null
                   ? new Prisma.Decimal(top10HolderRate.toFixed(2))
                   : null,
-              updated_at: new Date(),
             },
             create: {
               chain: token.chain,
@@ -323,7 +322,6 @@ async function updateTokenSecurity(): Promise<void> {
                 top10HolderRate !== null
                   ? new Prisma.Decimal(top10HolderRate.toFixed(2))
                   : null,
-              updated_at: new Date(),
             },
           });
 

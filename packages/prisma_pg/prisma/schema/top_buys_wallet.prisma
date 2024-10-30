@@ -5,7 +5,7 @@ model TopBuysWallet {
   wallet_address String    @db.VarChar(255)
   wallet_tag     String?   @db.VarChar(255)
   created_at     DateTime  @default(now())
-  updated_at     DateTime? @updatedAt
+  updated_at     DateTime @updatedAt
   token          Token     @relation(fields: [chain, token_address], references: [chain, token_address])
 
   @@unique([chain, token_address, wallet_address], name: "topBuysWalletCompositeUnique")

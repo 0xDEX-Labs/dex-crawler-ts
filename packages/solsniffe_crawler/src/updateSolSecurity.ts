@@ -129,7 +129,6 @@ function parseTokenSecurity(
     is_burn: auditRisk.lpBurned ? 1 : 0,
     is_mintable: auditRisk.mintDisabled ? 0 : 1,
     is_blacklisted: auditRisk.freezeDisabled ? 0 : 1,
-    updated_at: new Date(),
   };
 
   return tokenSecurityData;
@@ -142,7 +141,6 @@ interface TokenSecurityData {
   is_burn: number | null;
   is_mintable: number | null;
   is_blacklisted: number | null;
-  updated_at: Date;
 }
 
 // Function to update the TokenSecurity in the database
@@ -169,13 +167,11 @@ async function updateTokenSecurityInDatabase(
         is_burn: securityData.is_burn,
         is_mintable: securityData.is_mintable,
         is_blacklisted: securityData.is_blacklisted,
-        updated_at: securityData.updated_at,
       },
       update: {
         is_burn: securityData.is_burn,
         is_mintable: securityData.is_mintable,
         is_blacklisted: securityData.is_blacklisted,
-        updated_at: securityData.updated_at,
       },
     });
 

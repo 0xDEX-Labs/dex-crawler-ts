@@ -66,7 +66,6 @@ export interface GmgnSignalData {
   token_address: string;
   token_price: number;
   from_timestamp: number;
-  updated_at: number;
   buy_duration: number;
   buy_usd: number;
   tx_count: number;

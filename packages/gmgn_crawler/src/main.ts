@@ -2,8 +2,11 @@ import { router } from '@/routes.js';
 import { crawlerGmgnUrlConfigs } from './const/crawlerUrls.js';
 import gmgn from './site/gmgn.js';
 import { RequestQueue } from 'crawlee';
-import { generateTopBuyersUrl } from './utils/urlGenerate.js';
+import { generatePumpUrl, generateTopBuyersUrl } from './utils/urlGenerate.js';
 import prisma from './database/prisma.js';
+import pump from './site/pump.js';
+
+// https://pump.fun/BY1phzPpWavqEMC5zQsHpsVD2Tp11q4HpK2DfEpspump
 
 const data = [
   {
@@ -21,7 +24,8 @@ const data = [
 ];
 
 async function main() {
-  const requestQueue = await RequestQueue.open();
+  const requestQueueGmgn = await RequestQueue.open('gmgn');
+  const requestQueuePump = await RequestQueue.open('pump');
   const urls = [];
   for (let item of data) {
     urls.push({
@@ -30,20 +34,37 @@ async function main() {
       datasetName: 'top_buyers',
     });
   }
-  requestQueue.addRequests([...urls, ...crawlerGmgnUrlConfigs]);
+  const url = generatePumpUrl('BY1phzPpWavqEMC5zQsHpsVD2Tp11q4HpK2DfEpspump');
+  requestQueueGmgn.addRequests([
+    ...urls,
+    {
+      url: url,
+      label: 'token/info/pump',
+      datasetName: 'top_buyers',
+      uniqueKey: `${url}${new Date().valueOf()}`,
+    },
+    ...crawlerGmgnUrlConfigs,
+  ]);
 
-  const crawler = gmgn({
+  const crawlerGmgn = gmgn({
     requestHandler: router,
-    requestQueue,
+    requestQueue: requestQueueGmgn,
+  });
+
+  const crawlerPump = pump({
+    requestHandler: router,
+    requestQueue: requestQueuePump,
   });
 
   try {
-    await crawler.run();
+    await crawlerGmgn.run();
+    await crawlerPump.run();
     console.log('爬虫任务成功完成');
   } catch (error) {
     console.error('爬虫运行过程中发生错误:', error);
   } finally {
-    await crawler.teardown();
+    await crawlerGmgn.teardown();
+    await crawlerPump.teardown();
     await prisma.$disconnect();
     console.log('爬虫资源已清理，程序正常退出');
     process.exit(0);

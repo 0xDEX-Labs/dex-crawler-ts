@@ -42,7 +42,7 @@ model TokenSecurity {
   lp_holder_count              Int?
   transfer_pausable            Int?
   created_at                   DateTime  @default(now())
-  updated_at                   DateTime?
+  updated_at                   DateTime @updatedAt
   holder_count                 Int?
   lock_info_rate               Decimal?  @db.Decimal(10, 2)
   top_10_holder_rate           Decimal?  @db.Decimal(10, 2)

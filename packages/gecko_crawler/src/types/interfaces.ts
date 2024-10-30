@@ -3,7 +3,6 @@
 export interface Token {
   chain: string;
   token_address: string;
-  created_at?: Date;
 }
 
 export interface TokenStatsData {

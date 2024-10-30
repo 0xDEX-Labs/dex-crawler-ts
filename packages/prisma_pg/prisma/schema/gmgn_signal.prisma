@@ -25,9 +25,8 @@ model GmgnSignal {
   signal_id         Int?            @unique
   last_occurrence   DateTime        @default(now())
   occurrence_count  Int?            @default(1)
-  updated_at        DateTime?       @updatedAt
+  updated_at        DateTime       @updatedAt
   score             Decimal?
-  ExecutedSignal    ExecutedSignal?
   token             Token           @relation("TokenGmgnSignals", fields: [chain, token_address], references: [chain, token_address])
   UserOrder         UserOrder[]
 

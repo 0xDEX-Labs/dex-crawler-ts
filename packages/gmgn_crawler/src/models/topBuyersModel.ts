@@ -41,8 +41,6 @@ export async function upsertTopBuyer(
       chain: chain,
       token_address: topBuyerData.token_address,
       wallet_address: topBuyerData.wallet_address,
-      created_at: new Date(),
-      updated_at: new Date(),
     },
   });
 

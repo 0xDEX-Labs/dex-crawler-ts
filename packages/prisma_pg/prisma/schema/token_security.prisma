@@ -1,7 +1,7 @@
 model TokenSecurity {
-  id                           Int       @id @default(autoincrement())
-  chain                        String    @db.VarChar(255)
-  token_address                String    @db.VarChar(255)
+  id                           Int      @id @default(autoincrement())
+  chain                        String   @db.VarChar(255)
+  token_address                String   @db.VarChar(255)
   buy_tax                      String?
   creator_address              String?
   creator_balance              String?
@@ -41,13 +41,13 @@ model TokenSecurity {
   is_whitelisted               Int?
   lp_holder_count              Int?
   transfer_pausable            Int?
-  created_at                   DateTime  @default(now())
+  created_at                   DateTime @default(now())
   updated_at                   DateTime @updatedAt
   holder_count                 Int?
-  lock_info_rate               Decimal?  @db.Decimal(10, 2)
-  top_10_holder_rate           Decimal?  @db.Decimal(10, 2)
+  lock_info_rate               Decimal? @db.Decimal(10, 2)
+  top_10_holder_rate           Decimal? @db.Decimal(10, 2)
   is_burn                      Int?
-  token                        Token     @relation("TokenTokenSecurity", fields: [chain, token_address], references: [chain, token_address])
+  token                        Token    @relation("TokenTokenSecurity", fields: [chain, token_address], references: [chain, token_address])
 
   @@unique([chain, token_address])
   @@index([chain])

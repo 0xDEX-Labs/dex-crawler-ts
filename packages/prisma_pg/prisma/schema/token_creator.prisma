@@ -1,0 +1,36 @@
+model TokenCreator {
+  id                 Int       @id @default(autoincrement())
+  username           String    @unique @db.VarChar(255)
+  token_address      String?   @unique @db.VarChar(255)
+  display_name       String?   @db.VarChar(255)
+  twitter_type       String?   @db.VarChar(255)
+  twitter_url        String?   @db.VarChar(255)
+  followers_count    Int?      @default(0)
+  following_count    Int?      @default(0)
+  view_count         Int?      @default(0)
+  is_verified        Boolean?  @default(false)
+  twitter_content    String?   @db.Text
+  twitter_created_at DateTime?
+  subscription_count Int?      @default(0)
+
+  creator_address        String? @unique @db.VarChar(255)
+  total_token_count      Int?    @default(0)
+  valuable_token_count   Int?    @default(0)
+  valuable_tokens_detail Json?   @db.Json
+  raw_metadata           String? @db.Text
+
+  // Token deployment     history
+  total_deployments      Int? @default(0)
+  successful_deployments Int? @default(0)
+  failed_deployments     Int? @default(0)
+
+  // Tokens created by this address
+  tokens Token[] @relation("CreatorTokens")
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([token_address, creator_address])
+  @@index([creator_address])
+  @@index([token_address, creator_address])
+}

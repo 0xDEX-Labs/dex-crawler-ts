@@ -15,16 +15,16 @@ export const crawlerGmgnUrlConfigs: CrawlerUrlConfig[] = [
     label: 'rank/sol/swaps',
     datasetName: 'sol_swaps_tokens',
   },
-  {
-    url: 'https://gmgn.ai/defi/quotation/v1/rank/eth/wallets/7d?tag=smart_degen&tag=pump_smart&orderby=pnl_7d&direction=desc',
-    label: 'rank/eth/wallets',
-    datasetName: 'eth_smart_wallets_tokens',
-  },
-  {
-    url: 'https://gmgn.ai/defi/quotation/v1/rank/sol/wallets/7d?orderby=pnl_7d&direction=desc',
-    label: 'rank/sol/wallets',
-    datasetName: 'sol_smart_wallets_tokens',
-  },
+  // {
+  //   url: 'https://gmgn.ai/defi/quotation/v1/rank/eth/wallets/7d?tag=smart_degen&tag=pump_smart&orderby=pnl_7d&direction=desc',
+  //   label: 'rank/eth/wallets',
+  //   datasetName: 'eth_smart_wallets_tokens',
+  // },
+  // {
+  //   url: 'https://gmgn.ai/defi/quotation/v1/rank/sol/wallets/7d?orderby=pnl_7d&direction=desc',
+  //   label: 'rank/sol/wallets',
+  //   datasetName: 'sol_smart_wallets_tokens',
+  // },
 ];
 
 export const getDatasetName = (url: string): string => {

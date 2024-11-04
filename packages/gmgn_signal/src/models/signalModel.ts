@@ -58,12 +58,12 @@ export async function storeSignals(
                       '',
                     )}`
                 : null,
-              is_open_source: signal.token?.is_open_source === 1,
-              renounced: signal.token?.renounced,
+              //is_open_source: signal.token?.is_open_source === 1,
+              //renounced: signal.token?.renounced,
               pool_creation_timestamp: signal.token?.pool_creation_timestamp,
-              is_honeypot: signal.token?.is_honeypot === 1,
-              buy_tax: signal.token?.buy_tax,
-              sell_tax: signal.token?.sell_tax,
+              //is_honeypot: signal.token?.is_honeypot === 1,
+              //buy_tax: signal.token?.buy_tax,
+              //sell_tax: signal.token?.sell_tax,
             },
           });
           const now = new Date();
@@ -95,8 +95,6 @@ export async function storeSignals(
               swaps: signal.token.swaps,
               buys: signal.token.buys,
               sells: signal.token.sells,
-              price_change_percent: signal.token.price_change_percent,
-              price_change_percent1h: signal.token.price_change_percent1h,
             },
           });
 

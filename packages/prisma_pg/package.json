@@ -10,7 +10,7 @@
     "diff": "prisma migrate diff",
     "format": "prisma format",
     "pull": "prisma db pull",
-    "push": "prisma migrate push",
+    "push": "prisma db push",
     "build": "tsc -b",
     "studio": "prisma studio"
   },

@@ -2,7 +2,7 @@ model TokenCreator {
   id                     Int       @id @default(autoincrement())
   username               String    @unique @db.VarChar(255)
   token_address          String?   @unique @db.VarChar(255)
-  chain                  String    @default("sol") 
+  chain                  String    @default("sol")
   display_name           String?   @db.VarChar(255)
   twitter_type           String?   @db.VarChar(255)
   followers_count        Int?      @default(0)

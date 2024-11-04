@@ -1,36 +1,26 @@
 model Token {
-  id                                      Int             @id @default(autoincrement())
-  chain                                   String          @db.VarChar(255)
-  token_address                           String          @db.VarChar(255)
-  symbol                                  String?         @db.VarChar(255)
-  name                                    String?         @db.VarChar(255)
-  logo                                    String?
-  decimals                                Int?
-  total_supply                            Decimal?
-  website                                 String?
-  telegram                                String?
-  twitter                                 String?         @db.VarChar(255)
-  is_open_source                          Boolean?
-  pool_creation_timestamp                 BigInt?
-  is_honeypot                             Boolean?
-  buy_tax                                 Decimal?
-  sell_tax                                Decimal?
-  created_at                              DateTime        @default(now())
-  updated_at                              DateTime        @updatedAt
-  can_mint                                Boolean?
-  has_renounced_ownership                 Boolean?
-  top_pools                               String?
-  description                             String?
-  creator_close                           Boolean?
-  creator_token_status                    String?         @db.VarChar(255)
-  cto_flag                                Int?
-  is_show_alert                           Boolean?
-  lockInfo                                Json?
-  renounced                               Int?
-  call_number                             Int?
-  hot_level                               Int?
+  id            Int      @id @default(autoincrement())
+  chain         String   @db.VarChar(255)
+  token_address String   @db.VarChar(255)
+  symbol        String?  @db.VarChar(255)
+  name          String?  @db.VarChar(255)
+  logo          String?
+  decimals      Int?
+  total_supply  Decimal?
+  website       String?
+  telegram      String?
+  twitter       String?  @db.VarChar(255)
+
+  pool_creation_timestamp BigInt?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  can_mint   Boolean?
+
+  top_pools   String?
+  description String?
+
   rat_trader_amount_rate                  Decimal?
-  average_tax                             Decimal?        @db.Decimal
   bluechip_owner_count                    Int?
   bluechip_owner_percentage               Float?
   degen_call_count                        Int?

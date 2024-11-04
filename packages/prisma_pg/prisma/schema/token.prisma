@@ -1,25 +1,21 @@
 model Token {
-  id            Int      @id @default(autoincrement())
-  chain         String   @db.VarChar(255)
-  token_address String   @db.VarChar(255)
-  symbol        String?  @db.VarChar(255)
-  name          String?  @db.VarChar(255)
-  logo          String?
-  decimals      Int?
-  total_supply  Decimal?
-  website       String?
-  telegram      String?
-  twitter       String?  @db.VarChar(255)
-
-  pool_creation_timestamp BigInt?
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  can_mint   Boolean?
-
-  top_pools   String?
-  description String?
-
+  id                                      Int             @id @default(autoincrement())
+  chain                                   String          @db.VarChar(255)
+  token_address                           String          @db.VarChar(255)
+  symbol                                  String?         @db.VarChar(255)
+  name                                    String?         @db.VarChar(255)
+  logo                                    String?
+  decimals                                Int?
+  total_supply                            Decimal?
+  website                                 String?
+  telegram                                String?
+  twitter                                 String?         @db.VarChar(255)
+  pool_creation_timestamp                 BigInt?
+  created_at                              DateTime        @default(now())
+  updated_at                              DateTime        @updatedAt
+  can_mint                                Boolean?
+  top_pools                               String?
+  description                             String?
   rat_trader_amount_rate                  Decimal?
   bluechip_owner_count                    Int?
   bluechip_owner_percentage               Float?

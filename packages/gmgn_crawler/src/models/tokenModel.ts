@@ -103,10 +103,7 @@ async function parseAndSaveHotTokens(data: any[]) {
             swaps: token.swaps,
             buys: token.buys,
             sells: token.sells,
-            price_change_percent: token.price_change_percent,
-            price_change_percent1h: token.price_change_percent1h,
-            price_change_percent1m: token.price_change_percent1m,
-            price_change_percent5m: token.price_change_percent5m,
+
             smart_buy_24h: token.smart_buy_24h,
             smart_sell_24h: token.smart_sell_24h,
           },

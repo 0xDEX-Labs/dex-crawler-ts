@@ -25,8 +25,6 @@ interface TokenData {
   swaps: number;
   buys: number;
   sells: number;
-  price_change_percent: number;
-  price_change_percent1h: number;
 }
 
 export interface LinkData {

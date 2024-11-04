@@ -2,7 +2,6 @@ model TokenCreator {
   id                     Int       @id @default(autoincrement())
   username               String    @unique @db.VarChar(255)
   token_address          String?   @unique @db.VarChar(255)
-  chain                  String    @default("sol")
   display_name           String?   @db.VarChar(255)
   twitter_type           String?   @db.VarChar(255)
   followers_count        Int?      @default(0)
@@ -23,6 +22,7 @@ model TokenCreator {
   updated_at             DateTime  @updatedAt
   twitter_url            String?   @db.VarChar(255)
   raw_metadata           String?
+  chain                  String    @default("sol")
   tokens                 Token[]   @relation("CreatorTokens")
 
   @@unique([token_address, creator_address])

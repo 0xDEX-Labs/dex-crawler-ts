@@ -55,10 +55,6 @@ export interface TokenMetricsData {
 
   price_change_1h?: number;
   price_change_24h?: number;
-  price_change_percent?: number;
-  price_change_percent1h?: number;
-  price_change_percent1m?: number;
-  price_change_percent5m?: number;
 
   transactions_1h_buys?: number;
   transactions_1h_sells?: number;

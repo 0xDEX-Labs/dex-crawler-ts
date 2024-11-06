@@ -209,6 +209,9 @@ function parseTokenMetrics(token: Token, result: DextoolsResult): TokenMetrics {
     initial_liquidity_updated_at: result.metrics.initialLiquidityUpdatedAt,
     reserve: result.metrics.reserve,
   };
+  console.log(
+    `token: ${token.token_address} price:  ${tokenMetrics.price} market_cap: ${tokenMetrics.market_cap}`,
+  );
 
   return tokenMetrics;
 }
@@ -249,7 +252,6 @@ function parseTokenSecurity(
     buy_tax: parseTax(dextools.buy_tax),
     sell_tax: parseTax(dextools.sell_tax),
   };
-  console.log(tokenSecurityData);
 
   return tokenSecurityData;
 }

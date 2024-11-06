@@ -21,7 +21,7 @@ async function main() {
       // Set the Firefox browser to be used by the crawler.
       // If launcher option is not specified here,
       // default Chromium browser will be used.
-      launcher: firefox,
+      launcher: chromium,
       launchOptions: {
         ignoreHTTPSErrors: true, // 忽略 https 证书错误
       },

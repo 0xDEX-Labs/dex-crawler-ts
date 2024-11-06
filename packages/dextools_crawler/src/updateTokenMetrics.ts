@@ -290,6 +290,8 @@ async function updateTokenMetricsInDatabase(
         timestamp: BigInt(metrics.timestamp.toString()),
         price: metrics.price,
         market_cap: metrics.market_cap,
+        //@ts-ignore
+        source: 'dextools',
         fully_diluted_valuation: metrics.fully_diluted_valuation,
         liquidity: metrics.liquidity,
         volume_24h: metrics.volume_24h,

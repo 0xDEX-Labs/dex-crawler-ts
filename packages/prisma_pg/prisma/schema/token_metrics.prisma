@@ -2,6 +2,7 @@ model TokenMetrics {
   id                      Int       @id @default(autoincrement())
   chain                   String    @db.VarChar(255)
   token_address           String    @db.VarChar(255)
+  source                  String?   @db.VarChar(255) @default("default")
   price                   Float?
   market_cap              Float?
   fully_diluted_valuation Float?
